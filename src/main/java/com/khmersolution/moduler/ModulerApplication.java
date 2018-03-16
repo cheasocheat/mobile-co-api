@@ -49,38 +49,19 @@ public class ModulerApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-
-        initUsers();
-        initRoles();
-        initPermissions();
-
-        log.debug("Start assign permissions to roles ...");
-        Permission viewApp = permissionRepository.findByName("VIEW_APP");
-        Permission createApp = permissionRepository.findByName("CREATE_APP");
-        Permission updateApp = permissionRepository.findByName("UPDATE_APP");
-        Permission deleteApp = permissionRepository.findByName("DELETE_APP");
-
-        Permission viewApi = permissionRepository.findByName("VIEW_API");
-        Permission crudApi = permissionRepository.findByName("CRUD_API");
-
-        assignPermissionsToRole("USER", Arrays.asList(viewApi, viewApp));
-        assignPermissionsToRole("ADMIN", Arrays.asList(viewApi, viewApp, createApp, updateApp, deleteApp));
-        assignPermissionsToRole("CLIENT", Arrays.asList(viewApi, crudApi, viewApp, createApp, updateApp));
-
-        log.debug("Start assign roles to users ...");
-        assignRoleToUser("USER", "ravuthz");
-        assignRoleToUser("ADMIN", "adminz");
-        assignRoleToUser("CLIENT", "clientz");
-
-        listAllData();
+//        initUsers();
+//        initRoles();
+//        initPermissions();
+//        assignPermissionsToRoles();
+//        assignRolesToUsers();
+//        listAllData();
     }
 
     private void initRoles() {
         log.debug("Start creating roles ...");
         roleRepository.save(Arrays.asList(
                 new Role("USER", "Role as user"),
-                new Role("ADMIN", "Role as admin"),
-                new Role("CLIENT", "Role as client")
+                new Role("ADMIN", "Role as admin")
         ));
     }
 
@@ -148,4 +129,22 @@ public class ModulerApplication implements CommandLineRunner {
         }
     }
 
+    private void assignPermissionsToRoles() {
+        log.debug("Start assign permissions to roles ...");
+        Permission viewApp = permissionRepository.findByName("VIEW_APP");
+        Permission createApp = permissionRepository.findByName("CREATE_APP");
+        Permission updateApp = permissionRepository.findByName("UPDATE_APP");
+        Permission deleteApp = permissionRepository.findByName("DELETE_APP");
+        Permission viewApi = permissionRepository.findByName("VIEW_API");
+        Permission crudApi = permissionRepository.findByName("CRUD_API");
+
+        assignPermissionsToRole("USER", Arrays.asList(viewApi, viewApp));
+        assignPermissionsToRole("ADMIN", Arrays.asList(viewApi, viewApp, createApp, updateApp, deleteApp, crudApi));
+    }
+
+    private void assignRolesToUsers() {
+        log.debug("Start assign roles to users ...");
+        assignRoleToUser("USER", "ravuthz");
+        assignRoleToUser("ADMIN", "adminz");
+    }
 }
