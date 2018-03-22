@@ -19,5 +19,6 @@ public class Route {
     public static final String CLIENT = "/client";
     public static final String HELLO_WEB = "/";
     public static final String HELLO_API = "/hello";
+    public static String HONDA_BASE_URL = "http://localhost:8080/efinance-ws/efinance";
 
 }
