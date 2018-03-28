@@ -6,10 +6,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by DANG DIM
@@ -22,13 +25,20 @@ import java.util.Collections;
 public class DealerController {
 
     RestTemplate template = new RestTemplate();
-    private static final String url = "http://localhost:8080/webservice-ws/efinance/dealers/dealers";
 
     @RequestMapping(value = "/dealers", method = RequestMethod.GET)
-    public String getProvinceByTemplate(@ApiParam(value = "last update date", required = false) @Param("lastUpdate") String lastUpdate) {
+    public String getProvinceByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
+                                        @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
+        Map<String, String> param = new HashMap<>();
+        param.put("lastUpdate", lastUpdate);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        return template.exchange(url, HttpMethod.GET, entity, String.class).getBody();
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        if (product != null && !product.equals("") && product.equals("HD")){
+            return template.exchange(Route.HD_BASE_URL + "/dealers/dealer_list", HttpMethod.POST, entity, String.class, param).getBody();
+        }else {
+            return template.toString();
+        }
+
     }
 }

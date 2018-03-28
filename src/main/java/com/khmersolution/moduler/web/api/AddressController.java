@@ -1,14 +1,13 @@
 package com.khmersolution.moduler.web.api;
 
 import com.khmersolution.moduler.configure.Route;
-import io.swagger.annotations.ApiParam;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,15 +25,19 @@ import java.util.logging.Logger;
 public class AddressController {
 
     RestTemplate restTemplate = new RestTemplate();
-    private static final String url = "http://localhost:8080/webservice-ws/efinance/addresses/provinces";
-    private Logger logger = Logger.getLogger(String.valueOf(AddressController.class));
 
     @RequestMapping(value = "/provinces", method = RequestMethod.GET)
-    public String getProvinceByTemplate(@ApiParam(value = "last update date", required = false) @Param("lastUpdate") String lastUpdate) {
+    public String getProvinceByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
+                                        @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        return restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
+        if (product != null && !product.equals("") && product.equals("HD")){
+            return restTemplate.exchange(Route.HD_BASE_URL + "/address/provinces", HttpMethod.POST, entity, String.class).getBody();
+        }else {
+            return restTemplate.toString();
+        }
     }
 
 }
+

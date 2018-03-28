@@ -5,9 +5,10 @@ package com.khmersolution.moduler.configure;
  * Date : 8/24/2017, 1:44 PM
  * Email : ravuthz@gmail.com
  */
+
 public class Route {
 
-    public static final String API = "/api/v1";
+    public static final String API = "/ewbservice/api/v1";
     public static final String API_ID = "/{id}";
     public static final String API_USERS = "/api/v1/users";
     public static final String API_ROLES = "/api/v1/roles";
@@ -19,6 +20,7 @@ public class Route {
     public static final String CLIENT = "/client";
     public static final String HELLO_WEB = "/";
     public static final String HELLO_API = "/hello";
-    public static String HONDA_BASE_URL = "http://localhost:8080/efinance-ws/efinance";
+
+    public static String HD_BASE_URL = "http://localhost:8080/mobile/efinance";
 
 }
