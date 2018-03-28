@@ -2,17 +2,13 @@ package com.khmersolution.moduler.web.api;
 
 import com.khmersolution.moduler.configure.Route;
 import com.khmersolution.moduler.domain.response.document.QDocument;
-import io.swagger.annotations.ApiParam;
 import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.QueryParam;
 import java.util.*;
 
 
