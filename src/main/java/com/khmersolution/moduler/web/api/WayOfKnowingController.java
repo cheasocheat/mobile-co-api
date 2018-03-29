@@ -22,21 +22,18 @@ Create Date: 3/28/2018
 @RestController
 @RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
 public class WayOfKnowingController {
-    RestTemplate template = new RestTemplate();
+    RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "cowayofknowing", method = RequestMethod.GET)
+    @RequestMapping(value = "/wayofknowing", method = RequestMethod.GET)
     public String getWayOfKnowingByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                         @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
-        Map<String, String> param = new HashMap<>();
-        param.put("lastUpdate", lastUpdate);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
         if (product != null && !product.equals("") && product.equals("HD")){
-            return template.exchange(Route.HD_BASE_URL + "/wayofknowing/list_wayofknowings", HttpMethod.POST, entity, String.class, param).getBody();
+            return restTemplate.exchange(Route.HD_BASE_URL + "/wayofknowing/list_wayofknowings", HttpMethod.POST, entity, String.class).getBody();
         }else {
-            return template.toString();
+            return restTemplate.toString();
         }
-
     }
 }
