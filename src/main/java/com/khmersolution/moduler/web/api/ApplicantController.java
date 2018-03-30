@@ -1,6 +1,7 @@
 package com.khmersolution.moduler.web.api;
 
 import com.khmersolution.moduler.configure.Route;
+import com.khmersolution.moduler.domain.request.ApplicantVO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,13 +24,20 @@ public class ApplicantController {
     RestTemplate restTemplate = new RestTemplate();
 
     @RequestMapping(value = "/applicant", method = RequestMethod.GET)
-    public String getApplicantByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
-                                         @RequestParam(value = "product", required = true) String product) {
+    public String getApplicantByTemplate(
+            @RequestParam(value = "lastUpdate", required = false) String lastUpdate,
+            @RequestParam(value = "quotationId",required = true) Long quotationId,
+            @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
+
+        ApplicantVO applicant = new ApplicantVO();
+        applicant.setId(quotationId);
+        applicant.setLastUpdateDate(lastUpdate);
+
+        HttpEntity<ApplicantVO> entity = new HttpEntity<ApplicantVO>(applicant, headers);
         if (product != null && !product.equals("") && product.equals("HD")){
-            return restTemplate.exchange(Route.HD_BASE_URL + "/applicant/list_applicants", HttpMethod.POST, entity, String.class).getBody();
+            return restTemplate.exchange(Route.HD_BASE_URL + "/applicant/list", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return restTemplate.toString();
         }
