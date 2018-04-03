@@ -30,12 +30,10 @@ public class DealerController {
     public String getProvinceByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                         @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
-        Map<String, String> param = new HashMap<>();
-        param.put("lastUpdate", lastUpdate);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
         if (product != null && !product.equals("") && product.equals("HD")){
-            return template.exchange(Route.HD_BASE_URL + "/dealers/dealer_list", HttpMethod.POST, entity, String.class, param).getBody();
+            return template.exchange(Route.HD_BASE_URL + "/dealers/dealer_list", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return template.toString();
         }

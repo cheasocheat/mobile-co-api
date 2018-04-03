@@ -1,10 +1,6 @@
 package com.khmersolution.moduler.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by DANG DIM
@@ -16,58 +12,49 @@ public abstract class AbstractEntityResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("ID")
-    protected long id;
+    protected Long id;
+    protected String recordStatus;
+    protected String createdDate;
+    protected String updatedDate;
+    protected String product;
 
-    @JsonProperty("DESC")
-    protected String desc;
-
-    @JsonProperty("DESC_EN")
-    protected String descEn;
-
-    @JsonProperty("UPDATE_DATE")
-    private String updateDate;
-
-    @JsonProperty("CREATE_DATE")
-    private String createDate;
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getRecordStatus() {
+        return recordStatus;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
     }
 
-    public String getDescEn() {
-        return descEn;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDescEn(String descEn) {
-        this.descEn = descEn;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getUpdateDate() {
-        return updateDate;
+    public String getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdateDate(Date date) {
-        this.updateDate = new SimpleDateFormat("yyyy-M-dd hh:mm:ss.S").format(date);
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getProduct() {
+        return product;
     }
 
-    public void setCreateDate(Date date) {
-        this.createDate = new SimpleDateFormat("yyyy-M-dd hh:mm:ss.S").format(date);
+    public void setProduct(String product) {
+        this.product = product;
     }
 }

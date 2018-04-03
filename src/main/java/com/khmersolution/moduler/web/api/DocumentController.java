@@ -2,18 +2,17 @@ package com.khmersolution.moduler.web.api;
 
 import com.khmersolution.moduler.configure.Route;
 import com.khmersolution.moduler.domain.response.document.QDocument;
-import io.swagger.annotations.ApiParam;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.QueryParam;
-import java.util.*;
+import java.util.Collections;
 
 
 /**
@@ -75,29 +74,5 @@ public class DocumentController {
             return restTemplate.toString();
         }
     }
-
-
- /*   public String getToken() {
-
-        RestTemplate template = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        map.add("client_id", clientId);
-        map.add("client_secret", secret);
-        map.add("code", code);
-        map.add("grant_type", "authorization_code");
-
-        HttpEntity<MultiValueMap<String, String>> requestEntity= new HttpEntity<MultiValueMap<String, String>>(map, headers);
-        String token = "";
-        try{
-            BimResponse response = template.postForObject(url, requestEntity,  BimResponse.class);
-            token = response.getAccessToken() + " - " + response.getTokenType();
-        }
-        catch(Exception e){
-            token = e.getMessage();
-        }
-        return token;
-    }*/
 
 }
