@@ -32,7 +32,7 @@ public class AddressController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        if (product != null && !product.equals("") && product.equals("HD")){
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
             return restTemplate.exchange(Route.HD_BASE_URL + "/address/provinces", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return restTemplate.toString();

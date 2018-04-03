@@ -33,7 +33,7 @@ public class DocumentController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        if (product != null && !product.equals("") && product.equals("HD")) {
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")) {
             return restTemplate.exchange(Route.HD_BASE_URL + "/documents/list_document", HttpMethod.POST, entity, String.class).getBody();
         } else {
             return restTemplate.toString();
@@ -47,7 +47,7 @@ public class DocumentController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        if (product != null && !product.equals("") && product.equals("HD")) {
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")) {
             return restTemplate.exchange(Route.HD_BASE_URL + "/documents/list_group", HttpMethod.POST, entity, String.class).getBody();
         } else {
             return restTemplate.toString();
@@ -68,7 +68,7 @@ public class DocumentController {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<QDocument> request = new HttpEntity<>(qdocument, headers);
 
-        if (product != null && !product.equals("") && product.equals("HD")) {
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")) {
             return restTemplate.exchange(Route.HD_BASE_URL + "/quotation-documents/list", HttpMethod.POST, request, String.class).getBody();
         } else {
             return restTemplate.toString();

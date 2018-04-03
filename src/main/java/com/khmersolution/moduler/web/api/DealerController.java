@@ -32,7 +32,7 @@ public class DealerController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        if (product != null && !product.equals("") && product.equals("HD")){
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
             return template.exchange(Route.HD_BASE_URL + "/dealers/dealer_list", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return template.toString();

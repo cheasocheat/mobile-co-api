@@ -1,21 +1,15 @@
 package com.khmersolution.moduler.domain.quotation;
 
-import com.khmersolution.moduler.domain.AbstractEntityResponse;
-
 /**
  * Created by DANG DIM
  * Date     : 3/29/2018, 9:53 AM
  * Email    : d.dim@gl-f.com
  */
 
-public class Quotation extends AbstractEntityResponse {
+public class SubmitQuotation {
 
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String dateOfBirth;
-    private Long provinceId;
-    private String gender;
+    private Long id;
+    private String product;
     private String trxNo;
     private String quotaStatus;
     private String quotaPrevStatus;
@@ -27,53 +21,30 @@ public class Quotation extends AbstractEntityResponse {
     private String quotationDate;
     private String declineDate;
     private String rejectedDate;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String dateOfBirth;
+    private Long provinceId;
+    private String gender;
+    private String updateDate;
+    private String createDate;
+    private String statusRecord;
 
-    public String getFirstName() {
-        return firstName;
+    public Long getId() {
+        return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getProduct() {
+        return product;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Long getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(Long provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public String getTrxNo() {
@@ -162,5 +133,77 @@ public class Quotation extends AbstractEntityResponse {
 
     public void setRejectedDate(String rejectedDate) {
         this.rejectedDate = rejectedDate;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getStatusRecord() {
+        return statusRecord;
+    }
+
+    public void setStatusRecord(String statusRecord) {
+        this.statusRecord = statusRecord;
     }
 }
