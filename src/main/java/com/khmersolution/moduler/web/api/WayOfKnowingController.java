@@ -24,7 +24,7 @@ Create Date: 3/28/2018
 public class WayOfKnowingController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/wayofknowing", method = RequestMethod.GET)
+    @RequestMapping(value = "/wayofknowings", method = RequestMethod.GET)
     public String getWayOfKnowingByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                         @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();

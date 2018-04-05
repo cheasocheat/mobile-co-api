@@ -24,7 +24,7 @@ Create Date: 3/28/2018
 public class KeywordController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/keyword", method = RequestMethod.GET)
+    @RequestMapping(value = "/keywords", method = RequestMethod.GET)
     public String getKeyWordByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                         @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();

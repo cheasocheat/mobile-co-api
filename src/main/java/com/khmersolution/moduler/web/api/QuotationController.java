@@ -22,7 +22,7 @@ Create Date: 3/29/2018
 public class QuotationController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/quotation", method = RequestMethod.GET)
+    @RequestMapping(value = "/quotations", method = RequestMethod.GET)
     public String getQuotationByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                             @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();

@@ -22,7 +22,7 @@ Create Date: 3/29/2018
 public class COProfileController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/user-profiles", method = RequestMethod.GET)
     public String getProfileByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                                   @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();

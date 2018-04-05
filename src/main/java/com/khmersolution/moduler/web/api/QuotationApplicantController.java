@@ -23,7 +23,7 @@ Create Date: 3/29/2018
 public class QuotationApplicantController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/quotationapplicant", method = RequestMethod.GET)
+    @RequestMapping(value = "/quotation-applicants", method = RequestMethod.GET)
     public String getQuotationApplicantByTemplate(
             @RequestParam(value = "lastUpdate", required = false) String lastUpdate,
             @RequestParam(value = "quotationId",required = true) Long quotationId,
