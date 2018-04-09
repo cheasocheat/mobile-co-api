@@ -11,7 +11,7 @@ public class AuthTokenInfo {
 
     private String refresh_token;
 
-    private int expires_in;
+    private Integer expires_in;
 
     private String scope;
 
@@ -33,10 +33,10 @@ public class AuthTokenInfo {
     public void setRefresh_token(String refresh_token) {
         this.refresh_token = refresh_token;
     }
-    public int getExpires_in() {
+    public Integer getExpires_in() {
         return expires_in;
     }
-    public void setExpires_in(int expires_in) {
+    public void setExpires_in(Integer expires_in) {
         this.expires_in = expires_in;
     }
     public String getScope() {

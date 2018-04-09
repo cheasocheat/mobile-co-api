@@ -4,6 +4,7 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 
 /**
@@ -11,9 +12,7 @@ import java.util.LinkedHashMap;
  * Create Date: 03/18/2018.
  */
 public class HeaderInfo {
-    public static final String REST_SERVICE_URI = "http://localhost:8888";
-
-    public static final String AUTH_SERVER_URI = "http://localhost:8888/oauth/token";
+    public static final String AUTH_SERVER_URI = "http://localhost:9999/oauth/token";
 
     public static final String QPM_PASSWORD_GRANT_USERNAME = "?grant_type=password&username=";
 
@@ -26,7 +25,8 @@ public class HeaderInfo {
      */
     public static HttpHeaders getHeaders(){
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        //headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         return headers;
     }
     /*
@@ -81,7 +81,7 @@ public class HeaderInfo {
 
 
     public static void main(String args[]){
-        AuthTokenInfo tokenInfo = sendTokenRequest("my-trusted-client", "secret", "user", "user");
-
+        //AuthTokenInfo tokenInfo = sendTokenRequest("trusted-app", "secret", "adminz", "123123");
+        AuthTokenInfo tokenInfo = sendTokenRequest("trusted-app", "secret", "akra_sonisak", "11");
     }
 }
