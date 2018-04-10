@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AddressController {
 
     RestTemplate restTemplate = new RestTemplate();

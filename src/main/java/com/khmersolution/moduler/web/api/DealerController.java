@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class DealerController {
 
     RestTemplate template = new RestTemplate();

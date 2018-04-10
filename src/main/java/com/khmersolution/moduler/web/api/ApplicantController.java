@@ -19,7 +19,7 @@ Create By: Ron Rith
 Create Date: 3/29/2018
 */
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ApplicantController {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -36,7 +36,7 @@ public class ApplicantController {
         applicant.setLastUpdateDate(lastUpdate);
 
         HttpEntity<ApplicantVO> entity = new HttpEntity<ApplicantVO>(applicant, headers);
-        if (product != null && !product.equals("") && product.equals("HD")){
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
             return restTemplate.exchange(Route.HD_BASE_URL + "/applicant/list", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return restTemplate.toString();

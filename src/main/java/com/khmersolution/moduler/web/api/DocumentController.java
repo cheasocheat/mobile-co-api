@@ -35,7 +35,7 @@ import static org.springframework.util.MimeTypeUtils.generateMultipartBoundary;
  */
 
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class DocumentController {
 
     private RestTemplate restTemplate = new RestTemplate();

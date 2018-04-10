@@ -17,7 +17,7 @@ Create Date: 3/29/2018
 */
 
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class QuotationController {
     RestTemplate restTemplate = new RestTemplate();
 

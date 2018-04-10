@@ -20,7 +20,7 @@ Create By: Ron Rith
 Create Date: 3/28/2018
 */
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class KeywordController {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -30,7 +30,7 @@ public class KeywordController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        if (product != null && !product.equals("") && product.equals("HD")){
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
             return restTemplate.exchange(Route.HD_BASE_URL + "/keyword/list_cokeywords", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return restTemplate.toString();

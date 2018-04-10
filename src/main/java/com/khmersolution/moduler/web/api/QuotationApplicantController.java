@@ -18,8 +18,9 @@ import java.util.Collections;
 Create By: Ron Rith
 Create Date: 3/29/2018
 */
+
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class QuotationApplicantController {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -37,7 +38,7 @@ public class QuotationApplicantController {
         quotationApplicantVO.setLastUpdateDate(lastUpdate);
 
         HttpEntity<QuotationApplicantVO> entity = new HttpEntity<QuotationApplicantVO>(quotationApplicantVO, headers);
-        if (product != null && !product.equals("") && product.equals("HD")){
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
             return restTemplate.exchange(Route.HD_BASE_URL + "/quotationapplicant/list", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return restTemplate.toString();
