@@ -19,7 +19,7 @@ Create By: Ron Rith
 Create Date: 3/29/2018
 */
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
 public class COProfileController {
     RestTemplate restTemplate = new RestTemplate();
 

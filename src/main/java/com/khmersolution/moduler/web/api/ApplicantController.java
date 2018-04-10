@@ -19,11 +19,11 @@ Create By: Ron Rith
 Create Date: 3/29/2018
 */
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ApplicantController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/applicant", method = RequestMethod.GET)
+    @RequestMapping(value = "/applicants", method = RequestMethod.GET)
     public String getApplicantByTemplate(
             @RequestParam(value = "lastUpdate", required = false) String lastUpdate,
             @RequestParam(value = "quotationId",required = true) Long quotationId,
@@ -36,7 +36,7 @@ public class ApplicantController {
         applicant.setLastUpdateDate(lastUpdate);
 
         HttpEntity<ApplicantVO> entity = new HttpEntity<ApplicantVO>(applicant, headers);
-        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
+        if (product != null && !product.equals("") && product.equals("HD")){
             return restTemplate.exchange(Route.HD_BASE_URL + "/applicant/list", HttpMethod.POST, entity, String.class).getBody();
         }else {
             return restTemplate.toString();
