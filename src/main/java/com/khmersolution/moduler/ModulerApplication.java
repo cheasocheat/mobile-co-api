@@ -13,6 +13,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -26,13 +28,22 @@ import java.util.List;
 @EntityScan(basePackages = Package.ENTITY)
 @ComponentScan(basePackages = Package.BASE)
 @EnableJpaRepositories(basePackages = Package.REPOSITORY)
-public class ModulerApplication implements CommandLineRunner {
+public class ModulerApplication extends SpringBootServletInitializer /*implements CommandLineRunner*/ {
 
-    private final UserRepository userRepository;
+    /*private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PermissionRepository permissionRepository;
+    private final PermissionRepository permissionRepository;*/
 
-    @Autowired
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(ModulerApplication.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(ModulerApplication.class, args); // <-- modify this line.
+    }
+
+   /* @Autowired
     public ModulerApplication(
             UserRepository userRepository,
             RoleRepository roleRepository,
@@ -46,17 +57,17 @@ public class ModulerApplication implements CommandLineRunner {
         SpringApplication.run(ModulerApplication.class, args);
     }
 
-    @Override
+    *//*@Override
     @Transactional
     public void run(String... args) throws Exception {
-//        initUsers();
-//        initRoles();
-//        initPermissions();
-//        assignPermissionsToRoles();
-//        assignRolesToUsers();
-//        listAllData();
+        initUsers();
+        initRoles();
+        initPermissions();
+        assignPermissionsToRoles();
+        assignRolesToUsers();
+        listAllData();
     }
-
+*//*
     private void initRoles() {
         log.debug("Start creating roles ...");
         roleRepository.save(Arrays.asList(
@@ -146,5 +157,5 @@ public class ModulerApplication implements CommandLineRunner {
         log.debug("Start assign roles to users ...");
         assignRoleToUser("USER", "ravuthz");
         assignRoleToUser("ADMIN", "adminz");
-    }
+    }*/
 }

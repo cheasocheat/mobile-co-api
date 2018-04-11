@@ -194,7 +194,7 @@ public class DocumentController {
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
         File[] directoryListing = null;
         FileSystemResource[] fsr = null;
-        List<FileSystemResource> lfsr = null;
+        List<FileSystemResource> lfsr = new ArrayList<>();
 
         String home = AppConfigFile.getInstance().getValue("temp_folder");
         File tmp_folder = new File(home + "/" + "tmp");
@@ -224,7 +224,9 @@ public class DocumentController {
             /*if (directoryListing != null) {
                 listF.add(directoryListing);
             }*/
+
             FileSystemResource file = new FileSystemResource("C:\\Users\\d.dim\\Desktop\\img\\2.jpg");
+
             map.add("files", file);
             map.add("json", json);
 
