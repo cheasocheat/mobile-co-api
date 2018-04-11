@@ -50,18 +50,18 @@ public class AuthControllerTest implements RestTemplateHolder {
         restGetAction(host + OAUTH_TEST + HELLO_API);
     }
 
-    @Test
+    /*@Test
     @OAuth2ContextConfiguration(UserResource.class)
     public void helloAuth() throws Exception {
-        restGetAction(host + OAUTH_TEST + AUTH);
+        //restGetAction(host + OAUTH_TEST + AUTH);
     }
-
-    @Test
+*/
+   /* @Test
     @OAuth2ContextConfiguration(UserResource.class)
     public void helloUser() throws Exception {
-        restGetAction(host + OAUTH_TEST + USER);
+        //restGetAction(host + OAUTH_TEST + USER);
     }
-
+*/
     @Test
     @OAuth2ContextConfiguration(AdminResource.class)
     public void helloAdmin() throws Exception {

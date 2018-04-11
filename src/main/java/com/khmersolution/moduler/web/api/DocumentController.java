@@ -1,12 +1,12 @@
 package com.khmersolution.moduler.web.api;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.khmersolution.moduler.configure.Route;
 import com.khmersolution.moduler.domain.quotation.QuotationDocument;
 import com.khmersolution.moduler.domain.response.document.QDocument;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart;
+import com.khmersolution.moduler.util.AppConfigFile;
+import com.khmersolution.moduler.util.UploadUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -19,14 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 import static org.springframework.util.MimeTypeUtils.generateMultipartBoundary;
-
 
 /**
  * Created by DANG DIM
@@ -108,6 +104,11 @@ public class DocumentController {
         try {
 
             QuotationDocument qdMapper = objectMapper.readValue(json, QuotationDocument.class);
+           /* String home = AppConfigFile.getInstance().getValue("temp_folder");
+            File tmp_folder = new File(home + "/" + "tmp");
+            if (!tmp_folder.exists()) {
+                tmp_folder.mkdir();
+            }*/
 
             if (qdMapper.getProduct().equalsIgnoreCase(null) && qdMapper.getProduct().equalsIgnoreCase("")) {
                 return "Product is required !";
@@ -150,7 +151,7 @@ public class DocumentController {
         String response = null;
         try {
 
-            objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+            objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
             QuotationDocument qdMapper = objectMapper.readValue(json, QuotationDocument.class);
 
             if (qdMapper.getProduct().equalsIgnoreCase(null) && qdMapper.getProduct().equalsIgnoreCase("")) {
@@ -160,13 +161,12 @@ public class DocumentController {
             } else if (qdMapper.getQuotaId() == null && qdMapper.getQuotaId() > 0) {
                 return "QuotationId is required !";
             } else {
-                *//*HttpHeaders headers = new HttpHeaders();
+                HttpHeaders headers = new HttpHeaders();
                 headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
                 HttpEntity<QuotationDocument> request = new HttpEntity<>(qdMapper, headers);
                 if (qdMapper.getProduct().equalsIgnoreCase("Hd")) {
                     response = restTemplate.exchange(Route.HD_BASE_URL + "/quotation-documents/cool", HttpMethod.POST, request, String.class).getBody();
-                }*//*
-                response = doaction(qdMapper);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -187,13 +187,45 @@ public class DocumentController {
     }
 */
 
-    /*@RequestMapping(value = "/cool", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/cool", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
     public String cooAction(@RequestPart(required = false) MultipartFile[] files, String json) {
 
         final String uri = Route.HD_BASE_URL + "/quotation-documents/submit";
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+        File[] directoryListing = null;
+        FileSystemResource[] fsr = null;
+        List<FileSystemResource> lfsr = null;
+
+        String home = AppConfigFile.getInstance().getValue("temp_folder");
+        File tmp_folder = new File(home + "/" + "tmp");
+        if (!tmp_folder.exists()) {
+            tmp_folder.mkdir();
+        }
         try {
-            map.add("files", files);
+
+            InputStream inputStream = null;
+            if (files.length > 0) {
+                for (MultipartFile file : files) {
+                    //fileNames.add(file.getOriginalFilename());
+                    String fileName = file.getOriginalFilename();
+                    inputStream = file.getInputStream();
+                    UploadUtil.writeToFile(inputStream, tmp_folder + File.separator + fileName);
+
+                }
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+
+            File dir = new File(tmp_folder.getAbsolutePath());
+            directoryListing = dir.listFiles();
+            //allFile.add(dir.listFiles());
+
+            /*if (directoryListing != null) {
+                listF.add(directoryListing);
+            }*/
+            FileSystemResource file = new FileSystemResource("C:\\Users\\d.dim\\Desktop\\img\\2.jpg");
+            map.add("files", file);
             map.add("json", json);
 
         } catch (Exception e) {
@@ -214,15 +246,16 @@ public class DocumentController {
 
             //ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, request, String.class);
             HttpEntity<String> response = restTemplate.postForEntity(uri, request, String.class, headers);
-            System.out.println(map.toString());
-            System.out.println();
+            if (response.getBody() != null) {
+                delete(tmp_folder);
+            }
             return response.getBody();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
-    }*/
+    }
 
 
    /* public static void main(String[] args) throws IOException {
@@ -246,5 +279,38 @@ public class DocumentController {
 
     }*/
 
+    // Delete tmp folder
+    private void delete(File file) {
+        boolean success = false;
+        if (file.isDirectory()) {
+            for (File deleteMe : Objects.requireNonNull(file.listFiles())) {
+                delete(deleteMe);
+            }
+        }
+        success = file.delete();
+        if (success) {
+            System.out.println(file.getAbsoluteFile() + " File tmp is Deleted");
+        } else {
+            System.out.println(file.getAbsoluteFile() + " File tmp is Deletion failed!!!");
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -46,7 +46,6 @@ spring:
                 formatSql: false
         showSql: false
 
-
     http:
         multipart:
            max-file-size: 10MB
@@ -86,3 +85,6 @@ info:
         version: 1.0.0
 error:
     debug: true
+
+
+

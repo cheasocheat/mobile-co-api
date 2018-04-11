@@ -16,6 +16,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
 
 jar {
     baseName = 'mobile-co-api'
@@ -30,6 +31,7 @@ repositories {
 }
 
 dependencies {
+
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -42,7 +44,6 @@ dependencies {
     compile("io.springfox:springfox-swagger-ui:${swaggerBaseVersion}")
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile("org.postgresql:postgresql:${postgresVersion}")
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     runtime('com.h2database:h2')
     runtime('org.springframework.boot:spring-boot-devtools')
