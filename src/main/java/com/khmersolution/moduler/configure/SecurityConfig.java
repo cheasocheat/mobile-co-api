@@ -55,6 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/v2/api-docs",
                         "/swagger-resources/**",
+                        "/ewbservice/api/v1/provinces/**", // ignore security for temporary
+                        "/ewbservice/api/v1/documentgroups/**", // ignore security for temporary
+                        "/ewbservice/api/v1/documents/**", // ignore security for temporary
+                        "/ewbservice/api/v1/wayofknowings/**", // ignore security for temporary
+                        "/ewbservice/api/v1/keywords/**", // ignore security for temporary
                         "/swagger-ui.html**");
     }
 

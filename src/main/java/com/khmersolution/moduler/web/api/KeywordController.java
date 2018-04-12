@@ -19,12 +19,13 @@ import java.util.Map;
 Create By: Ron Rith
 Create Date: 3/28/2018
 */
+
 @RestController
 @RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class KeywordController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/keyword", method = RequestMethod.GET)
+    @RequestMapping(value = "/keywords", method = RequestMethod.GET)
     public String getKeyWordByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                         @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();

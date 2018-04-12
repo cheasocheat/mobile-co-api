@@ -1,8 +1,6 @@
 package com.khmersolution.moduler.domain.quotation;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 

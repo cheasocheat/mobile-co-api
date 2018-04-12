@@ -19,12 +19,13 @@ import java.util.Map;
 Create By: Ron Rith
 Create Date: 3/28/2018
 */
+
 @RestController
 @RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class WayOfKnowingController {
     RestTemplate restTemplate = new RestTemplate();
 
-    @RequestMapping(value = "/wayofknowing", method = RequestMethod.GET)
+    @RequestMapping(value = "/wayofknowings", method = RequestMethod.GET)
     public String getWayOfKnowingByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
                                         @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
