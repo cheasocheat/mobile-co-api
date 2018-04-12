@@ -21,7 +21,7 @@ public class Route {
     public static final String HELLO_WEB = "/";
     public static final String HELLO_API = "/hello";
 
-    public static String HD_BASE_URL = "http://192.168.7.19:8111/mobile/efinance";
-    //public static String HD_BASE_URL = "http://localhost:8080/mobile/efinance";
+    //public static String HD_BASE_URL = "http://192.168.7.19:8111/mobile/efinance";
+    public static String HD_BASE_URL = "http://localhost:8080/mobile/efinance";
 
 }

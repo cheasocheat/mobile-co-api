@@ -10,6 +10,7 @@ import com.khmersolution.moduler.util.UploadUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
@@ -21,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 
 import static org.springframework.util.MimeTypeUtils.generateMultipartBoundary;
 
@@ -192,42 +195,63 @@ public class DocumentController {
 
         final String uri = Route.HD_BASE_URL + "/quotation-documents/submit";
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        File[] directoryListing = null;
+        File[] secondFiles = null;
         FileSystemResource[] fsr = null;
-        List<FileSystemResource> lfsr = new ArrayList<>();
+        List<MultipartFile> multipartFiles = new ArrayList<>();
 
         String home = AppConfigFile.getInstance().getValue("temp_folder");
         File tmp_folder = new File(home + "/" + "tmp");
         if (!tmp_folder.exists()) {
             tmp_folder.mkdir();
         }
+
+       /* List<File> fileList = new ArrayList<>();
+        for (MultipartFile file : files) {
+            //fileNames.add(file.getOriginalFilename());
+            //fileList.add(file)
+        }
+        if (files.size() > 0){
+            //dummy(json, fileList);
+        }*/
+
+
         try {
 
-            InputStream inputStream = null;
-            if (files.length > 0) {
+            //dummy(json, files);
+
+            /*multipartFiles = new MultipartFile(files.size());
+            for (int i = 0; i < files.size(); i++){
+                multipartFiles[i] = (File) files.get(i);
+            }*/
+
+            /*InputStream inputStream = null;
+            if (files.size() > 0) {
                 for (MultipartFile file : files) {
-                    //fileNames.add(file.getOriginalFilename());
-                    String fileName = file.getOriginalFilename();
                     inputStream = file.getInputStream();
-                    UploadUtil.writeToFile(inputStream, tmp_folder + File.separator + fileName);
-
+                    UploadUtil.writeToFile(inputStream, tmp_folder + File.separator + file.getOriginalFilename());
                 }
-            }
-            if (inputStream != null) {
-                inputStream.close();
-            }
+            }*/
 
-            File dir = new File(tmp_folder.getAbsolutePath());
-            directoryListing = dir.listFiles();
+           /* public String uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles) throws IOException {
+                for(MultipartFile uploadedFile : uploadingFiles) {
+                    File file = new File(uploadingdir + uploadedFile.getOriginalFilename());
+                    uploadedFile.transferTo(file);
+                }*/
+            /*if (inputStream != null) {
+                inputStream.close();
+            }*/
+
+            //File dir = new File(tmp_folder.getAbsolutePath());
+            //directoryListing = dir.listFiles();
             //allFile.add(dir.listFiles());
 
             /*if (directoryListing != null) {
                 listF.add(directoryListing);
             }*/
 
-            FileSystemResource file = new FileSystemResource("C:\\Users\\d.dim\\Desktop\\img\\2.jpg");
+            //FileSystemResource file = new FileSystemResource(new File("C:\\Users\\d.dim\\Desktop\\img\\2.jpg"));
 
-            map.add("files", file);
+            //map.add("files", multipartFiles);
             map.add("json", json);
 
         } catch (Exception e) {
@@ -259,6 +283,48 @@ public class DocumentController {
 
     }
 
+    public void dummies(String json, MultipartFile[] file) throws IOException {
+        final String uri = Route.HD_BASE_URL + "/quotation-documents/submit";
+        InputStream[] inputStream = new InputStream[file.length];
+        for (int i = 0; i < file.length; i++)
+            inputStream[i] = file[i].getInputStream();
+
+        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+       // map.add("files", inputStream);//array of file
+        map.add("json", json);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Lists.newArrayList(MediaType.APPLICATION_JSON));
+        byte[] boundary = generateMultipartBoundary();
+        Map<String, String> bound_char = Collections.singletonMap("boundary", new String(boundary, "US-ASCII"));
+        MediaType contentType = new MediaType(MediaType.MULTIPART_FORM_DATA, bound_char);
+        headers.setContentType(contentType);
+
+        String response = new RestTemplate().postForObject(uri, new HttpEntity(map, headers), String.class);
+        JSONObject jsonResult = new JSONObject(response);
+    }
+
+
+   /* public String dummy(String json, @RequestPart List<File> list) {
+
+        final String uri = Route.HD_BASE_URL + "/quotation-documents/submit";
+        File[] files = new File[list.size()];
+        for (int i = 0; i < list.size(); i++)
+            files[i] = list.get(i);
+
+        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+        map.add("files", files);//array of file
+        map.add("json", json);
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity(map, headers);
+        String response = new RestTemplate().postForObject(uri, requestEntity, String.class);
+        JSONObject jsonResult = new JSONObject(response);
+
+        return response;
+    }
+*/
 
    /* public static void main(String[] args) throws IOException {
         byte[] boundary = generateMultipartBoundary();
@@ -280,6 +346,37 @@ public class DocumentController {
         restTemplate.exchange("http://localhost:8080/mobile/efinance/quotation-documents/cool", HttpMethod.POST, requestEntity, String.class);
 
     }*/
+
+
+    public void dummy(String json, MultipartFile[] files) throws IOException {
+        HttpEntity<Resource>[] images = new HttpEntity[files.length];
+        int index = 0;
+        for (MultipartFile file : files) {
+            Resource resource = new ByteArrayResource(file.getBytes()) {
+                @Override
+                public String getFilename() throws IllegalStateException {
+                    return file.getOriginalFilename();
+                }
+            };
+            HttpHeaders imageHeaders = new HttpHeaders();
+            imageHeaders.add("Content-Type", file.getContentType());
+            HttpEntity<Resource> imageEntity = new HttpEntity(resource, imageHeaders);
+            images[index] = imageEntity;
+            index++;
+        }
+
+        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+        map.add("files", images);//array of file
+        map.add("json", json);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        String response = new RestTemplate().postForObject("url", new HttpEntity(map, headers), String.class);
+        JSONObject jsonResult = new JSONObject(response);
+    }
+
+
 
     // Delete tmp folder
     private void delete(File file) {

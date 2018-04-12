@@ -28,22 +28,22 @@ import java.util.List;
 @EntityScan(basePackages = Package.ENTITY)
 @ComponentScan(basePackages = Package.BASE)
 @EnableJpaRepositories(basePackages = Package.REPOSITORY)
-public class ModulerApplication extends SpringBootServletInitializer /*implements CommandLineRunner*/ {
+public class ModulerApplication /*extends SpringBootServletInitializer*/ implements CommandLineRunner {
 
-    /*private final UserRepository userRepository;
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PermissionRepository permissionRepository;*/
-
-    @Override
+    private final PermissionRepository permissionRepository;
+    // TODO: 4/11/2018 RUN AS DEPLOY 
+    /*@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ModulerApplication.class);
     }
 
     public static void main(String[] args) {
         SpringApplication.run(ModulerApplication.class, args); // <-- modify this line.
-    }
+    }*/
 
-   /* @Autowired
+    @Autowired
     public ModulerApplication(
             UserRepository userRepository,
             RoleRepository roleRepository,
@@ -57,17 +57,17 @@ public class ModulerApplication extends SpringBootServletInitializer /*implement
         SpringApplication.run(ModulerApplication.class, args);
     }
 
-    *//*@Override
+    @Override
     @Transactional
     public void run(String... args) throws Exception {
-        initUsers();
+        /*initUsers();
         initRoles();
         initPermissions();
         assignPermissionsToRoles();
         assignRolesToUsers();
-        listAllData();
+        listAllData();*/
     }
-*//*
+
     private void initRoles() {
         log.debug("Start creating roles ...");
         roleRepository.save(Arrays.asList(
@@ -157,5 +157,5 @@ public class ModulerApplication extends SpringBootServletInitializer /*implement
         log.debug("Start assign roles to users ...");
         assignRoleToUser("USER", "ravuthz");
         assignRoleToUser("ADMIN", "adminz");
-    }*/
+    }
 }
