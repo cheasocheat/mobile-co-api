@@ -8,7 +8,7 @@ package com.khmersolution.moduler.configure;
 
 public class Route {
 
-    public static final String API = "/ewbservice/api/v1";//
+    public static final String API = "/ewebservice/api/v1";
     public static final String API_ID = "/{id}";
     public static final String API_USERS = "/api/v1/users";
     public static final String API_ROLES = "/api/v1/roles";

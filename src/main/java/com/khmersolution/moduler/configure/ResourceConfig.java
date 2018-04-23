@@ -42,12 +42,12 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/ewbservice/api/v1/provinces/**").permitAll()  // ignore security for permernent
-                .antMatchers( "/ewbservice/api/v1/dealers/**").permitAll()  // ignore security for permernent
-                .antMatchers( "/ewbservice/api/v1/documentgroups/**").permitAll()  // ignore security for permernent
-                .antMatchers( "/ewbservice/api/v1/documents/**").permitAll()  // ignore security for permernent
-                .antMatchers( "/ewbservice/api/v1/wayofknowings/**").permitAll()  // ignore security for permernent
-                .antMatchers( "/ewbservice/api/v1/keywords/**").permitAll()  // ignore security for permernent
+                .antMatchers( "/ewebservice/api/v1/provinces/**").permitAll()  // ignore security for permernent
+                .antMatchers( "/ewebservice/api/v1/dealers/**").permitAll()  // ignore security for permernent
+                .antMatchers( "/ewebservice/api/v1/documentgroups/**").permitAll()  // ignore security for permernent
+                .antMatchers( "/ewebservice/api/v1/documents/**").permitAll()  // ignore security for permernent
+                .antMatchers( "/ewebservice/api/v1/wayofknowings/**").permitAll()  // ignore security for permernent
+                .antMatchers( "/ewebservice/api/v1/keywords/**").permitAll()  // ignore security for permernent
                 .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/manages/**").permitAll()
                 .anyRequest().authenticated()
