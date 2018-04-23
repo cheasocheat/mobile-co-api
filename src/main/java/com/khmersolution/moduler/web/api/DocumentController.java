@@ -89,13 +89,13 @@ public class DocumentController {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         QuotationDocument quotationDocument = objectMapper.readValue(json, QuotationDocument.class);
         if (quotationDocument.getQuotaId() == null && quotationDocument.getQuotaId() < 0) {
-            return response = "quotation_id is require !";
+            return "quotation_id is require !";
         }
         if (quotationDocument.getDocumentId() == null && quotationDocument.getDocumentId() < 0) {
-            return response = "document_id is require !";
+            return "document_id is require !";
         }
         if (quotationDocument.getProduct() == null && quotationDocument.getProduct().equals("")) {
-            return response = "product type is require !";
+            return "product type is require !";
         }
         if (quotationDocument.getProduct().equalsIgnoreCase("HD")) {
             MultiValueMap<String, Object> data = new LinkedMultiValueMap();
@@ -124,13 +124,13 @@ public class DocumentController {
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         QuotationDocument quotationDocument = objectMapper.readValue(json, QuotationDocument.class);
         if (quotationDocument.getQuotaId() == null && quotationDocument.getQuotaId() < 0) {
-            return response = "quotation_id is require !";
+            return "quotation_id is require !";
         }
         if (quotationDocument.getDocumentId() == null && quotationDocument.getDocumentId() < 0) {
-            return response = "document_id is require !";
+            return "document_id is require !";
         }
         if (quotationDocument.getProduct() == null && quotationDocument.getProduct().equals("")) {
-            return response = "product type is require !";
+            return "product type is require !";
         }
         if (quotationDocument.getProduct().equalsIgnoreCase("HD")) {
             MultiValueMap<String, Object> data = new LinkedMultiValueMap();
