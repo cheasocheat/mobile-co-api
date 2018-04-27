@@ -34,7 +34,7 @@ spring:
         driverClassName: org.postgresql.Driver
         maxActive: 5
         password: 123
-        url: jdbc:postgresql://localhost:5432/co_mobile_db_test
+        url: jdbc:postgresql://localhost:5432/efinance_mobile_co_db
         username: postgres
     jpa:
         hibernate:
