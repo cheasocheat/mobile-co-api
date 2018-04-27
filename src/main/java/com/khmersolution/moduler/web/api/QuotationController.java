@@ -1,7 +1,9 @@
 package com.khmersolution.moduler.web.api;
 
 import com.khmersolution.moduler.configure.Route;
+import com.khmersolution.moduler.domain.quotation.Profiles;
 import com.khmersolution.moduler.domain.quotation.SubmitQuotation;
+import com.khmersolution.moduler.domain.response.document.QDocument;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,13 +25,19 @@ public class QuotationController {
 
     @RequestMapping(value = "/quotations", method = RequestMethod.GET)
     public String getQuotationByTemplate(@RequestParam(value = "lastUpdate", required = false) String lastUpdate,
-                                            @RequestParam(value = "product", required = true) String product) {
+                                         @RequestParam(value = "co_id", required = true) Long co_id,
+                                         @RequestParam(value = "product", required = true) String product) {
+
+        Profiles profiles = new Profiles();
+        profiles.setCoId(co_id);
+        profiles.setUpdatedDate(lastUpdate);
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<String>(lastUpdate, headers);
-        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
-            return restTemplate.exchange(Route.HD_BASE_URL + "/quotation/list_quotations", HttpMethod.POST, entity, String.class).getBody();
-        }else {
+        HttpEntity<Profiles> request = new HttpEntity<>(profiles, headers);
+
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")) {
+            return restTemplate.exchange(Route.HD_BASE_URL + "/quotation/list_quotations", HttpMethod.POST, request, String.class).getBody();
+        } else {
             return restTemplate.toString();
         }
     }

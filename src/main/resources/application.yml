@@ -34,7 +34,7 @@ spring:
         driverClassName: org.postgresql.Driver
         maxActive: 5
         password: 123
-        url: jdbc:postgresql://localhost:5432/efinance_mobile_co_db
+        url: jdbc:postgresql://localhost:5432/co_mobile_db_test
         username: postgres
     jpa:
         hibernate:
@@ -53,10 +53,10 @@ spring:
 ###### Custom Swagger Properties
 swagger:
     apiInfo:
-        contactEmail: ravuthz@gmail.com
-        contactName: ravuthz@gmail.com
-        contactUrl: http://github.com/ravuthz/user-management-api
-        description: Users Management REST API with Spring Boot + Spring Data JPA + Spring Data REST + Spring Security + Spring Security JWT + Spring Security OAUTH 2.
+        contactEmail: glh@gmail.com
+        contactName: glh-dev@gmail.com
+        contactUrl: https://www.gl-f.com/
+        description: Users Management REST API Spring Boot + Data JPA + Data REST + Spring Security + Spring Security JWT + Spring Security OAUTH 2.
         license: Apache 2.0
         licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
         termOfServiceUrl: http://swagger.io/terms/

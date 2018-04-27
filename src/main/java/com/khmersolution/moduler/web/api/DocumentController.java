@@ -84,7 +84,7 @@ public class DocumentController {
 
     @RequestMapping(value = "/quotation-documents", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
-    public String submitQuotationDocument(String json, MultipartFile[] files) throws IOException {
+    public String submitQuotationDocument(@RequestPart(required = false)String json, MultipartFile[] files) throws IOException {
         String response = null;
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         QuotationDocument quotationDocument = objectMapper.readValue(json, QuotationDocument.class);

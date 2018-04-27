@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@RestController
-@RequestMapping("/rest/api/search")
+/*@RestController
+@RequestMapping("/rest/api/search")*/
 public class SearchController {
 
-    private static final String PATTERN = "(\\w+?)(:|<|>)(\\w+?),";
+/*    private static final String PATTERN = "(\\w+?)(:|<|>)(\\w+?),";
 
     @Autowired
     private UserRepository userRepository;
@@ -72,5 +72,5 @@ public class SearchController {
 //
 
         return pages;
-    }
+    }*/
 }

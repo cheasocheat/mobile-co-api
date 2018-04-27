@@ -27,9 +27,9 @@ public class SubmitQuotation {
     private String dateOfBirth;
     private Long provinceId;
     private String gender;
-    private String updateDate;
-    private String createDate;
-    private String statusRecord;
+    private String updatedDate;
+    private String createdDate;
+    private String recordStatus;
 
     public Long getId() {
         return id;
@@ -183,27 +183,27 @@ public class SubmitQuotation {
         this.gender = gender;
     }
 
-    public String getUpdateDate() {
-        return updateDate;
+    public String getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getStatusRecord() {
-        return statusRecord;
+    public String getRecordStatus() {
+        return recordStatus;
     }
 
-    public void setStatusRecord(String statusRecord) {
-        this.statusRecord = statusRecord;
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
     }
 }

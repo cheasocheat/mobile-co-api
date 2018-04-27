@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
  * Email : ravuthz@gmail.com
  */
 
-@Slf4j
+/*@Slf4j
 @RestController
 @RequestMapping(value = Route.API_ROLES, produces = MediaType.APPLICATION_JSON_VALUE)
-@Api(value = "RoleController", description = "Role restful resource  with rest controller", tags = "Custom RoleController")
+@Api(value = "RoleController", description = "Role restful resource  with rest controller", tags = "Custom RoleController")*/
 public class RoleController {
 
-    @Autowired
+    /*@Autowired
     private RoleService roleService;
 
     @RequestMapping(params = {"page", "size"}, method = RequestMethod.GET)
@@ -77,6 +77,6 @@ public class RoleController {
         roleService.delete(id);
         log.debug("Role with id " + id + " deleted => " + role);
         return new ResponseEntity<>(HttpStatus.GONE);
-    }
+    }*/
 
 }

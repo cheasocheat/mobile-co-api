@@ -163,7 +163,7 @@ public class SwaggerConfig {
                 .description(description)
                 .version(version)
                 .termsOfServiceUrl(termOfServiceUrl)
-                .contact(new Contact(contactName, contactUrl, contactEmail))
+                .contact(new Contact(null, null, null))
                 .license(license)
                 .licenseUrl(licenseUrl)
                 .build();

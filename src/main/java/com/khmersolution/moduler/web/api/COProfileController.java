@@ -1,7 +1,8 @@
 package com.khmersolution.moduler.web.api;
 
 import com.khmersolution.moduler.configure.Route;
-import com.khmersolution.moduler.domain.request.ProfileRequestVO;
+import com.khmersolution.moduler.domain.quotation.Profiles;
+import com.khmersolution.moduler.domain.request.ApplicantVO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,36 +15,36 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
-/*
-Create By: Ron Rith
-Create Date: 3/29/2018
-*/
+/**
+ * Created by DANG DIM
+ * Date     : 4/26/2018, 4:58 PM
+ * Email    : d.dim@gl-f.com
+ */
+
 @RestController
-@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Route.API, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class COProfileController {
+
     RestTemplate restTemplate = new RestTemplate();
 
     @RequestMapping(value = "/user-profiles", method = RequestMethod.GET)
-    public String getProfileByTemplate(
-            @RequestParam(value = "token", required = false) String token,
-            @RequestParam(value = "coId", required = true) Long coId,
-            @RequestParam(value = "updatedDate",required = false) String updatedDate
-    ) {
+    public String getApplicantByTemplate(
+            @RequestParam(value = "lastUpdate", required = false) String lastUpdate,
+            @RequestParam(value = "co_id",required = true) Long co_id,
+            @RequestParam(value = "product", required = true) String product) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        ProfileRequestVO profileRequestVO = new ProfileRequestVO();
-        profileRequestVO.setCoId(coId);
-        if (updatedDate != null) {
-            profileRequestVO.setUpdatedDate(updatedDate);
+
+        Profiles profiles = new Profiles();
+        profiles.setCoId(co_id);
+        profiles.setUpdatedDate(lastUpdate);
+
+        HttpEntity<Profiles> entity = new HttpEntity<Profiles>(profiles, headers);
+        if (product != null && !product.equals("") && product.equalsIgnoreCase("HD")){
+            return restTemplate.exchange(Route.HD_BASE_URL + "/profile/list_profiles", HttpMethod.POST, entity, String.class).getBody();
+        }else {
+            return restTemplate.toString();
         }
-        if (token != null) {
-            profileRequestVO.setToken(token);
-        }
-
-
-        HttpEntity<ProfileRequestVO> entity = new HttpEntity<ProfileRequestVO>(profileRequestVO, headers);
-
-        return restTemplate.exchange(Route.HD_BASE_URL + "/profile/list_profiles", HttpMethod.POST, entity, String.class).getBody();
-
     }
 }
+
