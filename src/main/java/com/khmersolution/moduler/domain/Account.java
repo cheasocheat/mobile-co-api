@@ -18,8 +18,11 @@ import java.util.Set;
 public class Account extends User implements org.springframework.security.core.userdetails.UserDetails {
     private static final long serialVersionUID = 1L;
 
+    private User user;
+
     public Account(User user) {
         super(user);
+        this.user = user;
     }
 
     @Override
@@ -30,6 +33,10 @@ public class Account extends User implements org.springframework.security.core.u
     @Override
     public String getPassword() {
         return super.getPassword();
+    }
+
+    public String getPasswordSalt() {
+        return user.getPasswordSalt();
     }
 
     @Override

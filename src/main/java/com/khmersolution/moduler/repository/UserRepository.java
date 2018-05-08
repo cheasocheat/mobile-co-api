@@ -30,6 +30,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>, 
 
     User findByUsername(@Param("username") String username);
 
+    User findByPasswordSalt(@Param("passwordSalt") String passwordSalt);
+
     @RestResource(path = "first-name", rel = "first-name")
     List<User> findAllByFirstName(@Param("text") String text, Pageable pageable);
 

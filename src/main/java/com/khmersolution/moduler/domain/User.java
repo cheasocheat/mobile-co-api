@@ -48,6 +48,11 @@ public class User extends BaseEntity implements Serializable {
     private String password;
 
     @NotEmpty
+    @JsonIgnore
+    @ApiModelProperty(notes = "User's password salt (Must be strong)", required = false)
+    private String passwordSalt;
+
+    @NotEmpty
     @ApiModelProperty(notes = "User's first name (Or surname)", required = true)
     private String firstName;
 
@@ -73,6 +78,7 @@ public class User extends BaseEntity implements Serializable {
         this.email = user.email;
         this.username = user.username;
         this.password = user.password;
+        this.passwordSalt = user.passwordSalt;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.enabled = user.enabled;
