@@ -1,9 +1,8 @@
 package com.khmersolution.moduler.configure.util;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.security.crypto.codec.Utf8;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,36 +11,14 @@ import java.security.NoSuchAlgorithmException;
  * Created by cheasocheat
  * On 08, May, 2018
  */
-//public class MobilePasswordEncoder implements PasswordEncoder {
-public class MobilePasswordEncoder implements PasswordEncoder {
+public class AsvaPasswordEncoder implements PasswordEncoder {
 
     private static int KEY_LENGTH = 15;
     private static String prefixSalt = "@$#nKr==[";
     private static String suffixSalt = "]==DbmYS_qL#$@";
 
     @Override
-    public String encode(CharSequence rawPassword) {
-        String hashed = BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt(12));
-        return hashed;
-    }
-    @Override
-    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return BCrypt.checkpw(rawPassword.toString(), encodedPassword);
-    }
-
-   /* @Override
-    public String encode(CharSequence rawPassword, String salt) {
-        return this.encodePassword(String.valueOf(rawPassword), salt);
-    }
-
-    @Override
-    public boolean matches(String encodedPassword, CharSequence rawPassword, String salt) {
-        return this.isVermatchesified(String.valueOf(rawPassword), salt, encodedPassword);
-    }*/
-
-
-    // rawPass is a raw password supplied by user.
-    public static String encodePassword(String rawPass, Object salt) {
+    public String encodePassword(String rawPass, Object salt) {
         String saltedPass = mergePasswordAndSalt(rawPass, prefixSalt + salt + suffixSalt, false);
 
         MessageDigest messageDigest = null;
@@ -63,16 +40,16 @@ public class MobilePasswordEncoder implements PasswordEncoder {
         return new String(Hex.encode(digest));
     }
 
-    public boolean isVermatchesified(String rawPass, Object salt, String oldEncodedPasswd) {
+    @Override
+    public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
         boolean authenticated = false;
-        if (rawPass == null || salt == null || oldEncodedPasswd == null) {
+        if (rawPass == null || salt == null || encPass == null) {
             return authenticated;
         }
 
         String newEncodedPasswd = encodePassword(rawPass, salt);
 
-        return oldEncodedPasswd.equals(newEncodedPasswd);
-
+        return encPass.equals(newEncodedPasswd);
     }
 
     public static String mergePasswordAndSalt(String password, Object salt, boolean strict) {
@@ -92,6 +69,7 @@ public class MobilePasswordEncoder implements PasswordEncoder {
             return password + "{" + salt.toString() + "}";
         }
     }
+
 
 
 }
